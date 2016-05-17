@@ -1,7 +1,21 @@
+//----------------------------------
+// define a variable for hour strings
+//----------------------------------
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 
-// Pike Place Market
+//----------------------------------
+// Render hourly and daily stats for all five locations
+//----------------------------------
+pikePlace.render();
+capitolPlace.render();
+splPlace.render();
+sluPlace.render();
+seatacPlace.render();
 
+//----------------------------------//----------------------------------
+//----------------------------------
+// Pike Place Market
+//----------------------------------
 var pikePlace = {
   location: 'Pike Place Market',
 
@@ -53,6 +67,7 @@ var pikePlace = {
     }
   },
 
+  // formulate strings for hourly reporting
   formHourlyOutputString: function() {
     for (var i = 0; i < hours.length; i++) {
       var myStr = hours[i] + ':' + this.totalPoundsPerHr[i] + ' [' + this.custPerHr[i] + ' customers, ' +
@@ -62,6 +77,7 @@ var pikePlace = {
     }
   },
 
+  // formulate strings for daily reporting
   formDailyStatsString: function() {
     var s1 = 'Total customers at ' + this.location + ': ' + this.totalCustPerDay.toFixed(1);
     this.dailyReportString.push(s1);
@@ -73,6 +89,7 @@ var pikePlace = {
     this.dailyReportString.push(s4);
   },
 
+  // write to the HTML page
   render: function() {
     //calculate all stats, form output strings
     this.calcHourlyStats();
@@ -97,11 +114,12 @@ var pikePlace = {
       ulElement.appendChild(liElement);
     }
   }
-
 };
 
-pikePlace.render();
-
+//----------------------------------//----------------------------------
+//----------------------------------
+// Capitol Hill
+//----------------------------------
 var capitolPlace = {
   location: 'Capitol Hill',
 
@@ -153,6 +171,7 @@ var capitolPlace = {
     }
   },
 
+  // formulate strings for hourly reporting
   formHourlyOutputString: function() {
     for (var i = 0; i < hours.length; i++) {
       var myStr = hours[i] + ':' + this.totalPoundsPerHr[i] + ' [' + this.custPerHr[i] + ' customers, ' +
@@ -162,6 +181,7 @@ var capitolPlace = {
     }
   },
 
+  // formulate strings for daily reporting
   formDailyStatsString: function() {
     var s1 = 'Total customers at ' + this.location + ': ' + this.totalCustPerDay.toFixed(1);
     this.dailyReportString.push(s1);
@@ -173,6 +193,7 @@ var capitolPlace = {
     this.dailyReportString.push(s4);
   },
 
+  // write to the HTML page
   render: function() {
     //calculate all stats, form output strings
     this.calcHourlyStats();
@@ -200,7 +221,10 @@ var capitolPlace = {
 
 };
 
-capitolPlace.render();
+//----------------------------------//----------------------------------
+//----------------------------------
+// Seattle Public Library
+//----------------------------------
 
 var splPlace = {
   location: 'Seattle Public Library',
@@ -253,6 +277,7 @@ var splPlace = {
     }
   },
 
+  // formulate strings for hourly reporting
   formHourlyOutputString: function() {
     for (var i = 0; i < hours.length; i++) {
       var myStr = hours[i] + ':' + this.totalPoundsPerHr[i] + ' [' + this.custPerHr[i] + ' customers, ' +
@@ -262,6 +287,7 @@ var splPlace = {
     }
   },
 
+  // formulate strings for daily reporting
   formDailyStatsString: function() {
     var s1 = 'Total customers at ' + this.location + ': ' + this.totalCustPerDay.toFixed(1);
     this.dailyReportString.push(s1);
@@ -273,6 +299,7 @@ var splPlace = {
     this.dailyReportString.push(s4);
   },
 
+  // write to the HTML page
   render: function() {
     //calculate all stats, form output strings
     this.calcHourlyStats();
@@ -299,8 +326,10 @@ var splPlace = {
   }
 };
 
-splPlace.render();
-
+//----------------------------------//----------------------------------
+//----------------------------------
+// South Lake Union
+//----------------------------------
 var sluPlace = {
   location: 'South Lake Union',
 
@@ -352,6 +381,7 @@ var sluPlace = {
     }
   },
 
+  // formulate strings for hourly reporting
   formHourlyOutputString: function() {
     for (var i = 0; i < hours.length; i++) {
       var myStr = hours[i] + ':' + this.totalPoundsPerHr[i] + ' [' + this.custPerHr[i] + ' customers, ' +
@@ -361,6 +391,7 @@ var sluPlace = {
     }
   },
 
+  // formulate strings for daily reporting
   formDailyStatsString: function() {
     var s1 = 'Total customers at ' + this.location + ': ' + this.totalCustPerDay.toFixed(1);
     this.dailyReportString.push(s1);
@@ -372,6 +403,7 @@ var sluPlace = {
     this.dailyReportString.push(s4);
   },
 
+  // write to the HTML page
   render: function() {
     //calculate all stats, form output strings
     this.calcHourlyStats();
@@ -398,8 +430,10 @@ var sluPlace = {
   }
 };
 
-sluPlace.render();
-
+//----------------------------------//----------------------------------
+//----------------------------------
+// Sea-Tac
+//----------------------------------
 var seatacPlace = {
   location: 'Sea-Tac Airport',
 
@@ -451,6 +485,7 @@ var seatacPlace = {
     }
   },
 
+  // formulate strings for hourly reporting
   formHourlyOutputString: function() {
     for (var i = 0; i < hours.length; i++) {
       var myStr = hours[i] + ':' + this.totalPoundsPerHr[i] + ' [' + this.custPerHr[i] + ' customers, ' +
@@ -460,6 +495,7 @@ var seatacPlace = {
     }
   },
 
+  // formulate strings for daily reporting
   formDailyStatsString: function() {
     var s1 = 'Total customers at ' + this.location + ': ' + this.totalCustPerDay.toFixed(1);
     this.dailyReportString.push(s1);
@@ -471,6 +507,7 @@ var seatacPlace = {
     this.dailyReportString.push(s4);
   },
 
+  // write to the HTML page
   render: function() {
     //calculate all stats, form output strings
     this.calcHourlyStats();
@@ -496,5 +533,3 @@ var seatacPlace = {
     }
   }
 };
-
-seatacPlace.render();
