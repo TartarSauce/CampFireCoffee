@@ -1,4 +1,3 @@
-
 // define a variable for hour strings
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 
@@ -57,7 +56,7 @@ CoffeeKiosk.prototype.calcHourlyStats = function() {
   }
 };
 
-// update all variables holding the daily stats
+// update all variables holding daily stats
 CoffeeKiosk.prototype.calcDailyStats = function() {
   for (var i = 0; i < hours.length; i++) {
     this.totalCustPerDay += parseFloat(this.custPerHr[i]);
@@ -66,7 +65,6 @@ CoffeeKiosk.prototype.calcDailyStats = function() {
     this.totalPoundsPerDay += (parseFloat(this.poundsForCupsPerHr[i]) + parseFloat(this.poundsForPkgsPerHr[i]));
     this.totalEmpPerDay += parseFloat(this.totalEmpPerHr[i]);
   }
-
   this.totalEmpPerDay = Math.ceil(parseFloat(this.totalEmpPerDay));
 };
 
@@ -93,77 +91,53 @@ sluPlace.getStats();
 seatacPlace.getStats();
 
 //---------------------------------------------
-// POPULATE BEANS BY LOCATION
-// UPDATE FIRST HTML TABLE
+// DEFINE FUNCTION TO DRAW TABLE
 //---------------------------------------------
-var beansTable = document.getElementById('beans-table');
+drawTableData = function(tableName) {
+  var empTable = document.getElementById(tableName);
+  console.log(empTable);
 
-var trElement = document.createElement('tr');
-var thElement = document.createElement('th');
-thElement.textContent = '';
-trElement.appendChild(thElement);
-var thElement = document.createElement('th');
-thElement.textContent = 'Daily Total';
-trElement.appendChild(thElement);
-
-for (var i = 0; i < hours.length; i++) {
-  var thElement = document.createElement('th');
-  thElement.textContent = hours[i];
-  trElement.appendChild(thElement);
-}
-beansTable.appendChild(trElement);
-
-for (var i = 0; i < kioskLocations.length; i++) {
   var trElement = document.createElement('tr');
-  var tdElement = document.createElement('td');
-  tdElement.textContent = kioskLocations[i].location;
-  trElement.appendChild(tdElement);
-  var tdElement = document.createElement('td');
-  tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
-  trElement.appendChild(tdElement);
-  for (var j = 0; j < hours.length; j++) {
-    var tdElement = document.createElement('td');
-    tdElement.textContent = kioskLocations[i].totalPoundsPerHr[j];
-    trElement.appendChild(tdElement);
-  }
-  beansTable.appendChild(trElement);
-}
-beansTable.appendChild(trElement);
-
-//---------------------------------------------
-// POPULATE EMPLOYEES BY LOCATION
-// UPDATE SECOND HTML TABLE
-//---------------------------------------------
-var empTable = document.getElementById('baristas-table');
-
-var trElement = document.createElement('tr');
-var thElement = document.createElement('th');
-thElement.textContent = '';
-trElement.appendChild(thElement);
-var thElement = document.createElement('th');
-thElement.textContent = 'Daily Total';
-trElement.appendChild(thElement);
-
-for (var i = 0; i < hours.length; i++) {
   var thElement = document.createElement('th');
-  thElement.textContent = hours[i];
+  thElement.textContent = '';
   trElement.appendChild(thElement);
-}
-empTable.appendChild(trElement);
+  var thElement = document.createElement('th');
+  thElement.textContent = 'Daily Total';
+  trElement.appendChild(thElement);
 
-for (var i = 0; i < kioskLocations.length; i++) {
-  var trElement = document.createElement('tr');
-  var tdElement = document.createElement('td');
-  tdElement.textContent = kioskLocations[i].location;
-  trElement.appendChild(tdElement);
-  var tdElement = document.createElement('td');
-  tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
-  trElement.appendChild(tdElement);
-  for (var j = 0; j < hours.length; j++) {
-    var tdElement = document.createElement('td');
-    tdElement.textContent = kioskLocations[i].totalEmpPerHr[j];
-    trElement.appendChild(tdElement);
+  for (var i = 0; i < hours.length; i++) {
+    var thElement = document.createElement('th');
+    thElement.textContent = hours[i];
+    trElement.appendChild(thElement);
   }
   empTable.appendChild(trElement);
-}
-empTable.appendChild(trElement);
+
+  for (var i = 0; i < kioskLocations.length; i++) {
+    var trElement = document.createElement('tr');
+    var tdElement = document.createElement('td');
+    tdElement.textContent = kioskLocations[i].location;
+    trElement.appendChild(tdElement);
+    var tdElement = document.createElement('td');
+    if (tableName === 'beans-table') {
+      tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
+    } else if (tableName === 'baristas-table') {
+      tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
+    }
+    trElement.appendChild(tdElement);
+    for (var j = 0; j < hours.length; j++) {
+      var tdElement = document.createElement('td');
+      if (tableName === 'beans-table') {
+        tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
+      } else if (tableName === 'baristas-table') {
+        tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
+      }
+      trElement.appendChild(tdElement);
+    }
+    empTable.appendChild(trElement);
+  }
+  empTable.appendChild(trElement);
+};
+
+// call the draw function for beans table and employee table
+drawTableData('beans-table');
+drawTableData('baristas-table');
