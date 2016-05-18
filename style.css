@@ -12,6 +12,10 @@ table {
   font-size: 10px;
 }
 
+legend, label {
+  font-size: 12px;
+}
+
 th {
   background-color: green;
   color: white;
