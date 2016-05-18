@@ -94,6 +94,8 @@ seatacPlace.getStats();
 // DEFINE FUNCTION TO DRAW TABLE
 //---------------------------------------------
 drawTableData = function(tableName) {
+  var dailyTotalsAcrossLocations = 0;
+  var dailyTotalsAcrossHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   var empTable = document.getElementById(tableName);
   console.log(empTable);
 
@@ -120,20 +122,42 @@ drawTableData = function(tableName) {
     var tdElement = document.createElement('td');
     if (tableName === 'beans-table') {
       tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
+      dailyTotalsAcrossLocations += (kioskLocations[i].totalPoundsPerDay);
     } else if (tableName === 'baristas-table') {
       tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
+      dailyTotalsAcrossLocations += (kioskLocations[i].totalEmpPerDay);
     }
     trElement.appendChild(tdElement);
     for (var j = 0; j < hours.length; j++) {
       var tdElement = document.createElement('td');
       if (tableName === 'beans-table') {
-        tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
+        tdElement.textContent = kioskLocations[i].totalPoundsPerHr[j];
+        dailyTotalsAcrossHours[j] += parseFloat(kioskLocations[i].totalPoundsPerHr[j]);
       } else if (tableName === 'baristas-table') {
-        tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
+        tdElement.textContent = kioskLocations[i].totalEmpPerHr[j];
+        dailyTotalsAcrossHours[j] += parseFloat(kioskLocations[i].totalEmpPerHr[j]);
       }
       trElement.appendChild(tdElement);
     }
     empTable.appendChild(trElement);
+  }
+  empTable.appendChild(trElement);
+
+  console.log(dailyTotalsAcrossHours);
+  var trElement = document.createElement('tr');
+  var tdElement = document.createElement('td');
+  tdElement.textContent = 'Totals';
+  trElement.appendChild(tdElement);
+
+  // put out the last row of totals
+  var tdElement = document.createElement('td');
+  tdElement.textContent = dailyTotalsAcrossLocations.toFixed(1);
+  trElement.appendChild(tdElement);
+
+  for (var i = 0; i < hours.length; i++) {
+    var tdElement = document.createElement('td');
+    tdElement.textContent = dailyTotalsAcrossHours[i].toFixed(1);
+    trElement.appendChild(tdElement);
   }
   empTable.appendChild(trElement);
 };
