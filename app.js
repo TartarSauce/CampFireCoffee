@@ -1,8 +1,17 @@
+
+//---------------------------------------------
+// GLOBAL VARIABLES
+//---------------------------------------------
 // define a variable for hour strings
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 
 // define a variable for kiosk locations
 kioskLocations = [];
+
+// list of relevant DOM elements
+var newKioskForm = document.getElementById('newkiosk');
+var beansTable = document.getElementById('beans-table');
+var baristaTable = document.getElementById('baristas-table');
 
 //---------------------------------------------
 // DEFINE CLASS COFFEEKIOSK
@@ -31,10 +40,6 @@ function CoffeeKiosk (location, minCustPerHr, maxCustPerHr, cupsPerCust, poundsP
   this.totalPoundsPerDay = 0;
   this.totalEmpPerDay = 0;
 
-  // reporting strings
-  this.hourlyReportString = [];
-  this.dailyReportString = [];
-
   kioskLocations.push(this);
 };
 
@@ -58,6 +63,11 @@ CoffeeKiosk.prototype.calcHourlyStats = function() {
 
 // update all variables holding daily stats
 CoffeeKiosk.prototype.calcDailyStats = function() {
+  this.totalCustPerDay = 0;
+  this.totalCupsPerDay = 0;
+  this.totalPoundPkgsPerDay = 0;
+  this.totalPoundsPerDay = 0;
+  this.totalEmpPerDay = 0;
   for (var i = 0; i < hours.length; i++) {
     this.totalCustPerDay += parseFloat(this.custPerHr[i]);
     this.totalCupsPerDay += parseFloat(this.cupsPerHr[i]);
@@ -74,94 +84,141 @@ CoffeeKiosk.prototype.getStats = function() {
   this.calcDailyStats();
 };
 
+// render all row information for every kiosk location
+CoffeeKiosk.prototype.render = function(tableName) {
+  var trElement = document.createElement('tr');
+  trElement.appendChild(newCell('td', this.location));
+
+  if (tableName === 'beans-table') {
+    var cellText = (this.totalPoundsPerDay).toFixed(1);
+  } else if (tableName === 'baristas-table') {
+    var cellText = (this.totalEmpPerDay).toFixed(1);
+  }
+  trElement.appendChild(newCell('td', cellText));
+
+  for (var j = 0; j < hours.length; j++) {
+    if (tableName === 'beans-table') {
+      var cellText = this.totalPoundsPerHr[j];
+    } else if (tableName === 'baristas-table') {
+      var cellText = this.totalEmpPerHr[j];
+    }
+    trElement.appendChild(newCell('td', cellText));
+  }
+  return trElement;
+};
+
 //---------------------------------------------
-// CREATE KIOSK OBJECTS FOR EACH LOCATION
+// DEFINE OTHER FUNCTIONS FOR DRAWING TABLES,
+// HANDLING EVENTS
 //---------------------------------------------
+// helper function to add a td or th element
+function newCell(elementType, elementText) {
+  var elementId = document.createElement(elementType);
+  elementId.textContent = elementText;
+  return elementId;
+}
+
+// draw both the beans and barista tables
+function drawTables() {
+  drawTableHeader('beans-table');
+  drawTableHeader('baristas-table');
+  for (var i = 0; i < kioskLocations.length; i++) {
+    kioskLocations[i].getStats();
+    beansTable.appendChild(kioskLocations[i].render('beans-table'));
+    baristaTable.appendChild(kioskLocations[i].render('baristas-table'));
+  }
+  drawTableFooter('beans-table');
+  drawTableFooter('baristas-table');
+}
+
+// draw header
+function drawTableHeader(tableName) {
+  var myTable = document.getElementById(tableName);
+  var trElement = document.createElement('tr');
+  trElement.appendChild(newCell('th', ''));
+  trElement.appendChild(newCell('th', 'Daily Total'));
+  for (var i = 0; i < hours.length; i++) {
+    trElement.appendChild(newCell('th', hours[i]));
+  }
+  myTable.appendChild(trElement);
+}
+
+// draw footer
+function drawTableFooter(tableName) {
+  var myTable = document.getElementById(tableName);
+  var trElement = document.createElement('tr');
+  trElement.appendChild(newCell('td', 'Totals'));
+
+  // get the totals across all the locations
+  var totalforlocations = 0;
+  for (var i = 0; i < kioskLocations.length; i++) {
+    if (tableName === 'beans-table') {
+      totalforlocations += kioskLocations[i].totalPoundsPerDay;
+    } else if (tableName === 'baristas-table') {
+      totalforlocations += kioskLocations[i].totalEmpPerDay;
+    }
+  }
+  trElement.appendChild(newCell('td', totalforlocations.toFixed(1)));
+
+  // get the totals for every column
+  for (var i = 0; i < hours.length; i++) {
+    var totalforhr = 0;
+    for (var j = 0; j < kioskLocations.length; j++) {
+      if (tableName === 'beans-table') {
+        totalforhr += parseFloat(kioskLocations[j].totalPoundsPerHr[i]);
+      } else if (tableName === 'baristas-table') {
+        totalforhr += parseFloat(kioskLocations[j].totalEmpPerHr[i]);
+      }
+    }
+    trElement.appendChild(newCell('td', totalforhr.toFixed(1)));
+  }
+  myTable.appendChild(trElement);
+}
+
+// Event handler for form that accepts new kiosk input
+function newKioskSubmit(event) {
+  event.preventDefault(); // prevents page reload
+
+  if (!event.target.loc.value || !event.target.min.value ||
+     !event.target.max.value || !event.target.cups.value ||
+     !event.target.pounds.value) {
+    return alert('Input boxes cannot be empty'); // if missing data
+  } else {
+    beansTable.innerHTML = '';    // clear tables for redrawing
+    baristaTable.innerHTML = '';
+  }
+
+  var loc = event.target.loc.value;
+  var min = parseFloat(event.target.min.value);
+  var max = parseFloat(event.target.max.value);
+  var cups = parseFloat(event.target.cups.value);
+  var pounds = parseFloat(event.target.pounds.value);
+
+  var newKiosk = new CoffeeKiosk(loc, min, max, cups, pounds);
+  console.log(newKiosk);
+
+  event.target.loc.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.cups.value = null;
+  event.target.pounds.value = null;
+
+  // redraw tables with new info added
+  drawTables();
+};
+
+//---------------------------------------------
+// EXECUTABLE CODE BEGINS
+//---------------------------------------------
+// create kiosk objects for each initial location known
 var pikePlace = new CoffeeKiosk('Pike Place', 14, 35, 1.2, 0.34);
 var capitolPlace = new CoffeeKiosk('Capitol Hill', 12, 28, 3.2, 0.03);
 var splPlace = new CoffeeKiosk('Seattle Public Library', 9, 45, 2.6, 0.02);
 var sluPlace = new CoffeeKiosk('South Lake Union', 5, 18, 1.3, 0.04);
 var seatacPlace = new CoffeeKiosk('Sea-Tac Airport', 28, 44, 1.1, 0.41);
 
-// call the getStats method for each object
-pikePlace.getStats();
-capitolPlace.getStats();
-splPlace.getStats();
-sluPlace.getStats();
-seatacPlace.getStats();
+// first draw tables
+drawTables();
 
-//---------------------------------------------
-// DEFINE FUNCTION TO DRAW TABLE
-//---------------------------------------------
-drawTableData = function(tableName) {
-  var dailyTotalsAcrossLocations = 0;
-  var dailyTotalsAcrossHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  var empTable = document.getElementById(tableName);
-  console.log(empTable);
-
-  var trElement = document.createElement('tr');
-  var thElement = document.createElement('th');
-  thElement.textContent = '';
-  trElement.appendChild(thElement);
-  var thElement = document.createElement('th');
-  thElement.textContent = 'Daily Total';
-  trElement.appendChild(thElement);
-
-  for (var i = 0; i < hours.length; i++) {
-    var thElement = document.createElement('th');
-    thElement.textContent = hours[i];
-    trElement.appendChild(thElement);
-  }
-  empTable.appendChild(trElement);
-
-  for (var i = 0; i < kioskLocations.length; i++) {
-    var trElement = document.createElement('tr');
-    var tdElement = document.createElement('td');
-    tdElement.textContent = kioskLocations[i].location;
-    trElement.appendChild(tdElement);
-    var tdElement = document.createElement('td');
-    if (tableName === 'beans-table') {
-      tdElement.textContent = (kioskLocations[i].totalPoundsPerDay).toFixed(1);
-      dailyTotalsAcrossLocations += (kioskLocations[i].totalPoundsPerDay);
-    } else if (tableName === 'baristas-table') {
-      tdElement.textContent = (kioskLocations[i].totalEmpPerDay).toFixed(1);
-      dailyTotalsAcrossLocations += (kioskLocations[i].totalEmpPerDay);
-    }
-    trElement.appendChild(tdElement);
-    for (var j = 0; j < hours.length; j++) {
-      var tdElement = document.createElement('td');
-      if (tableName === 'beans-table') {
-        tdElement.textContent = kioskLocations[i].totalPoundsPerHr[j];
-        dailyTotalsAcrossHours[j] += parseFloat(kioskLocations[i].totalPoundsPerHr[j]);
-      } else if (tableName === 'baristas-table') {
-        tdElement.textContent = kioskLocations[i].totalEmpPerHr[j];
-        dailyTotalsAcrossHours[j] += parseFloat(kioskLocations[i].totalEmpPerHr[j]);
-      }
-      trElement.appendChild(tdElement);
-    }
-    empTable.appendChild(trElement);
-  }
-  empTable.appendChild(trElement);
-
-  console.log(dailyTotalsAcrossHours);
-  var trElement = document.createElement('tr');
-  var tdElement = document.createElement('td');
-  tdElement.textContent = 'Totals';
-  trElement.appendChild(tdElement);
-
-  // put out the last row of totals
-  var tdElement = document.createElement('td');
-  tdElement.textContent = dailyTotalsAcrossLocations.toFixed(1);
-  trElement.appendChild(tdElement);
-
-  for (var i = 0; i < hours.length; i++) {
-    var tdElement = document.createElement('td');
-    tdElement.textContent = dailyTotalsAcrossHours[i].toFixed(1);
-    trElement.appendChild(tdElement);
-  }
-  empTable.appendChild(trElement);
-};
-
-// call the draw function for beans table and employee table
-drawTableData('beans-table');
-drawTableData('baristas-table');
+// define event listener for the submit button
+newKioskForm.addEventListener('submit', newKioskSubmit);

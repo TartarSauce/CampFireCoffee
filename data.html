@@ -9,12 +9,36 @@
   </head>
 
   <body>
-    <h1>Beans Needed By Location Each Day</h1>
-    <table id="beans-table"></table>
+  <form id="newkiosk">
+    <fieldset>
+      <legend>Add kiosk details</legend>
 
-    <h1>Barista Hours Needed By Location Each Day</h1>
-    <table id="baristas-table"></table>
+      <div>
+        <label for="loc">Location: </label>
+        <input name="loc" type="text" />
 
+        <label for="min">Min: </label>
+        <input name="min" type="text" />
+
+        <label for="max">Max: </label>
+        <input name="max" type="text" />
+
+        <label for="cups">Cups per customer: </label>
+        <input name="cups" type="text" />
+
+        <label for="pounds">Pounds per customer: </label>
+        <input name="pounds" type="text" />
+      </div>
+
+      <div class="submit"><button type="submit">Update Tables</button></div>
+    </fieldset>
+  </form>
+
+  <h1>Beans Needed By Location Each Day</h1>
+  <table id="beans-table"></table>
+
+  <h1>Baristas Needed By Location Each Day</h1>
+  <table id="baristas-table"></table>
     <script src="app.js"></script>
   </body>
 </html>
