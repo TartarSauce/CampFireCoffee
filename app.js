@@ -87,25 +87,22 @@ CoffeeKiosk.prototype.getStats = function() {
 // render all row information for every kiosk location
 CoffeeKiosk.prototype.render = function(tableName) {
   var trElement = document.createElement('tr');
-  var tdElement = document.createElement('td');
-  tdElement.textContent = this.location;
-  trElement.appendChild(tdElement);
-  var tdElement = document.createElement('td');
+  trElement.appendChild(newCell('td', this.location));
+
   if (tableName === 'beans-table') {
-    tdElement.textContent = (this.totalPoundsPerDay).toFixed(1);
+    var cellText = (this.totalPoundsPerDay).toFixed(1);
   } else if (tableName === 'baristas-table') {
-    tdElement.textContent = (this.totalEmpPerDay).toFixed(1);
+    var cellText = (this.totalEmpPerDay).toFixed(1);
   }
-  trElement.appendChild(tdElement);
+  trElement.appendChild(newCell('td', cellText));
 
   for (var j = 0; j < hours.length; j++) {
-    var tdElement = document.createElement('td');
     if (tableName === 'beans-table') {
-      tdElement.textContent = this.totalPoundsPerHr[j];
+      var cellText = this.totalPoundsPerHr[j];
     } else if (tableName === 'baristas-table') {
-      tdElement.textContent = this.totalEmpPerHr[j];
+      var cellText = this.totalEmpPerHr[j];
     }
-    trElement.appendChild(tdElement);
+    trElement.appendChild(newCell('td', cellText));
   }
   return trElement;
 };
@@ -114,17 +111,22 @@ CoffeeKiosk.prototype.render = function(tableName) {
 // DEFINE OTHER FUNCTIONS FOR DRAWING TABLES,
 // HANDLING EVENTS
 //---------------------------------------------
+// helper function to add a td or th element
+function newCell(elementType, elementText) {
+  var elementId = document.createElement(elementType);
+  elementId.textContent = elementText;
+  return elementId;
+}
+
 // draw both the beans and barista tables
 function drawTables() {
   drawTableHeader('beans-table');
   drawTableHeader('baristas-table');
-
   for (var i = 0; i < kioskLocations.length; i++) {
     kioskLocations[i].getStats();
     beansTable.appendChild(kioskLocations[i].render('beans-table'));
     baristaTable.appendChild(kioskLocations[i].render('baristas-table'));
   }
-
   drawTableFooter('beans-table');
   drawTableFooter('baristas-table');
 }
@@ -132,31 +134,20 @@ function drawTables() {
 // draw header
 function drawTableHeader(tableName) {
   var myTable = document.getElementById(tableName);
-
   var trElement = document.createElement('tr');
-  var thElement = document.createElement('th');
-  thElement.textContent = '';
-  trElement.appendChild(thElement);
-  var thElement = document.createElement('th');
-  thElement.textContent = 'Daily Total';
-  trElement.appendChild(thElement);
-
+  trElement.appendChild(newCell('th', ''));
+  trElement.appendChild(newCell('th', 'Daily Total'));
   for (var i = 0; i < hours.length; i++) {
-    var thElement = document.createElement('th');
-    thElement.textContent = hours[i];
-    trElement.appendChild(thElement);
+    trElement.appendChild(newCell('th', hours[i]));
   }
   myTable.appendChild(trElement);
 }
 
-//draw footer
+// draw footer
 function drawTableFooter(tableName) {
   var myTable = document.getElementById(tableName);
-
   var trElement = document.createElement('tr');
-  var tdElement = document.createElement('td');
-  tdElement.textContent = 'Totals';
-  trElement.appendChild(tdElement);
+  trElement.appendChild(newCell('td', 'Totals'));
 
   // get the totals across all the locations
   var totalforlocations = 0;
@@ -167,10 +158,7 @@ function drawTableFooter(tableName) {
       totalforlocations += kioskLocations[i].totalEmpPerDay;
     }
   }
-
-  var tdElement = document.createElement('td');
-  tdElement.textContent = totalforlocations.toFixed(1);
-  trElement.appendChild(tdElement);
+  trElement.appendChild(newCell('td', totalforlocations.toFixed(1)));
 
   // get the totals for every column
   for (var i = 0; i < hours.length; i++) {
@@ -182,9 +170,7 @@ function drawTableFooter(tableName) {
         totalforhr += parseFloat(kioskLocations[j].totalEmpPerHr[i]);
       }
     }
-    var tdElement = document.createElement('td');
-    tdElement.textContent = totalforhr.toFixed(1);
-    trElement.appendChild(tdElement);
+    trElement.appendChild(newCell('td', totalforhr.toFixed(1)));
   }
   myTable.appendChild(trElement);
 }
