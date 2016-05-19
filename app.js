@@ -179,8 +179,14 @@ function drawTableFooter(tableName) {
 function newKioskSubmit(event) {
   event.preventDefault(); // prevents page reload
 
-  beansTable.innerHTML = '';
-  baristaTable.innerHTML = '';
+  if (!event.target.loc.value || !event.target.min.value ||
+     !event.target.max.value || !event.target.cups.value ||
+     !event.target.pounds.value) {
+    return alert('Input boxes cannot be empty'); // if missing data
+  } else {
+    beansTable.innerHTML = '';    // clear tables for redrawing
+    baristaTable.innerHTML = '';
+  }
 
   var loc = event.target.loc.value;
   var min = parseFloat(event.target.min.value);
