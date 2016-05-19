@@ -9,31 +9,45 @@
   </head>
 
   <body>
+    <div class="inputblock">
+    <h4>Add Kiosk Details</h4>
   <form id="newkiosk">
-    <fieldset>
-      <legend>Add kiosk details</legend>
+    <!--<fieldset> -->
+      <!-- <legend>Add kiosk details</legend> -->
 
-      <div>
-        <label for="loc">Location: </label>
-        <input name="loc" type="text" />
+      <!-- <div> -->
+        <!-- <label for="loc">Location: </label> -->
+      <ul>
+        <li>
+        <input class="kioskloc" name="loc" type="text" placeholder="Location"/>
 
-        <label for="min">Min: </label>
-        <input name="min" type="text" />
+        <!-- <label for="min">Min: </label> -->
 
-        <label for="max">Max: </label>
-        <input name="max" type="text" />
+      </li>
 
-        <label for="cups">Cups per customer: </label>
-        <input name="cups" type="text" />
+      <li>
+        <input name="min" type="text" placeholder="Minimum Customers"/>
+        <!--< label for="max">Max: </label> -->
+        <input name="max" type="text" placeholder="Maximum Customers" />
 
-        <label for="pounds">Pounds per customer: </label>
-        <input name="pounds" type="text" />
-      </div>
+        <!-- <label for="cups">Cups per customer: </label> -->
 
-      <div class="submit"><button type="submit">Update Tables</button></div>
-    </fieldset>
+      </li>
+
+      <li>
+        <input name="cups" type="text" placeholder="Cups per Customer" />
+        <!-- <label for="pounds">Pounds per customer: </label> -->
+        <input name="pounds" type="text" placeholder="Pounds per Customer"/>
+      <!-- </div> -->
+</li>
+<li>
+        <button type="submit">Update Tables</button>
+      </li>
+      </ul>
+    <!-- </fieldset> -->
   </form>
 
+</div>
   <h1>Beans Needed By Location Each Day</h1>
   <table id="beans-table"></table>
 

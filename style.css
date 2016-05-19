@@ -11,16 +11,33 @@ table {
   border-collapse: collapse;
   font-size: 10px;
 }
+
+.inputblock {
+  /*margin-left:30%; */
+  height:177px;
+  width:320px;
+  border:1px solid #5A352D;
+  border-radius: 5px;
+}
+
+h4 {
+  width:inherit;
+  background-color: #5A352D;
+  color:white;
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  margin: 0px;
+}
+
 form {
-  height:75px;
-  width:60%;
-  padding:10px 0px 10px 10px;
+  border-top:-10px;
   background-color: #DDDDDD;
-  border: 1px solid green;
+  border: 1px solid #5A352D;
 }
 
 fieldset {
-  background-color: #DDDDDD;
+  background-color: red;
+  width:inherit;
   color:green;
   padding:2px 2px 0px 2px;
   border:1px solid #DDDDDD;
@@ -38,26 +55,38 @@ label, button {
   padding: 4px;
 }
 
+ul {
+  width:inherit;
+  list-style: none;
+  margin:10px 0px 10px -15px;
+}
+
+li {
+  padding-right:5px 0px 5px 5px;
+  margin-bottom: 5px;
+}
+
 input {
   border:1px solid #999999;
-  width:50px;
+  width:120px;
+  padding:5px;
+}
+
+.kioskloc {
+  width:260px;
 }
 
 button {
   font-size: 12px;
   font-weight: bold;
   background-color: white;
-  color: green;
-  float:right;
-}
-
-div {
-  margin:2px;
-  padding:2px;
+  color: #5A352D;
+  width:270px;
+  border-top: 1px solid #green;
 }
 
 th {
-  background-color: green;
+  background-color: #5A352D;
   color: white;
 }
 
@@ -72,7 +101,7 @@ tr:nth-child(even){
 }
 
 td:first-child, td:nth-child(2) {
-  background-color:green;
+  background-color:#5A352D;
   color:white;
   font-weight:bold;
 }
