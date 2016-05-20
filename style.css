@@ -1,23 +1,54 @@
 body {
   font-family: sans-serif;
   font-family: Verdana;
+  margin-left:25px;
+  margin-right:25px;
+  margin-top:25px;
 }
 
-h1 {
+h2 {
+  background-color: #5A352D;
+  color:white;
+  text-align: center;
+  padding:20px 20px 20px 20px;
+  margin-bottom: 2px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
   font-size: 18px;
+  text-align: center;
 }
 
 table {
-  border-collapse: collapse;
   font-size: 10px;
+  width:100%;
 }
 
 .inputblock {
-  /*margin-left:30%; */
-  height:177px;
-  width:320px;
-  border:1px solid #5A352D;
-  border-radius: 5px;
+  height:200px;
+  width:315px;
+  margin-bottom:10px;
+}
+
+.header {
+  width:100%;
+}
+
+img {
+  margin-left:9px;
+  height:202px;
+  width:33%;
+  margin-right:-14px;
+}
+
+.coffeebeans {
+  height:202px;
+  width:75%;
+  float:right;
 }
 
 h4 {
@@ -35,40 +66,25 @@ form {
   border: 1px solid #5A352D;
 }
 
-fieldset {
-  background-color: red;
-  width:inherit;
-  color:green;
-  padding:2px 2px 0px 2px;
-  border:1px solid #DDDDDD;
-}
-
-legend {
-  padding-left:5px;
-  font-size: 14px;
-  font-weight:bold;
-  background-color: #DDDDDD;
-}
-
 label, button {
   font-size: 12px;
   padding: 4px;
 }
 
 ul {
-  width:inherit;
   list-style: none;
   margin:10px 0px 10px -15px;
 }
 
 li {
-  padding-right:5px 0px 5px 5px;
+  padding-right:5px 0px 5px 0px;
   margin-bottom: 5px;
+  font-size: 14px;
 }
 
 input {
   border:1px solid #999999;
-  width:120px;
+  width:127px;
   padding:5px;
 }
 
@@ -79,9 +95,9 @@ input {
 button {
   font-size: 12px;
   font-weight: bold;
-  background-color: white;
-  color: #5A352D;
-  width:270px;
+  background-color: #5A352D;
+  color: white;
+  width:260px;
   border-top: 1px solid #green;
 }
 
@@ -93,7 +109,6 @@ th {
 th, td {
   padding: 8px 8px 8px 8px;
   text-align: left;
-
 }
 
 tr:nth-child(even){
