@@ -3,56 +3,63 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Campfire Coffee, Tuesday version</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campfire Coffee</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
 
-  <body>
+<body>
+  <h2>Campfire Coffee Daily Report</h2>
+  <div class="header">
+    <div class="coffeebeans">
+      <img src="assets/coffee.jpg"/>
+      <img src="assets/coffee.jpg"/>
+      <img src="assets/coffee.jpg"/>
+    </div>
     <div class="inputblock">
-    <h4>Add Kiosk Details</h4>
-  <form id="newkiosk">
-    <!--<fieldset> -->
-      <!-- <legend>Add kiosk details</legend> -->
+      <h4>Add New Kiosk Information</h4>
+      <form id="newkiosk">
+        <ul>
+          <li>
+            <input class="kioskloc" name="loc" type="text" placeholder="Location"/>
+          </li>
 
-      <!-- <div> -->
-        <!-- <label for="loc">Location: </label> -->
-      <ul>
-        <li>
-        <input class="kioskloc" name="loc" type="text" placeholder="Location"/>
+          <li>
+            <input name="min" type="text" placeholder="Min. Customers"/>
+            <input name="max" type="text" placeholder="Max. Customers" />
+          </li>
 
-        <!-- <label for="min">Min: </label> -->
+          <li>
+            <input name="cups" type="text" placeholder="Cups/Cust" />
+            <input name="pounds" type="text" placeholder="Pounds/Cust"/>
+          </li>
 
-      </li>
+          <li>
+            <button type="submit">Update Tables</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
 
-      <li>
-        <input name="min" type="text" placeholder="Minimum Customers"/>
-        <!--< label for="max">Max: </label> -->
-        <input name="max" type="text" placeholder="Maximum Customers" />
+  <div class="panel panel-default">
+    <h3>Beans Needed By Location Each Day (in pounds)</h3>
+    <table class="panel-body" id="beans-table"></table>
+  </div>
 
-        <!-- <label for="cups">Cups per customer: </label> -->
+  <div class="panel panel-default">
+    <h3>Baristas Needed By Location Each Day</h3>
+    <table class-"panel-body" id="baristas-table"></table>
+  </div>
 
-      </li>
-
-      <li>
-        <input name="cups" type="text" placeholder="Cups per Customer" />
-        <!-- <label for="pounds">Pounds per customer: </label> -->
-        <input name="pounds" type="text" placeholder="Pounds per Customer"/>
-      <!-- </div> -->
-</li>
-<li>
-        <button type="submit">Update Tables</button>
-      </li>
-      </ul>
-    <!-- </fieldset> -->
-  </form>
-
-</div>
-  <h1>Beans Needed By Location Each Day</h1>
-  <table id="beans-table"></table>
-
-  <h1>Baristas Needed By Location Each Day</h1>
-  <table id="baristas-table"></table>
-    <script src="app.js"></script>
-  </body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>

@@ -136,7 +136,7 @@ function drawTableHeader(tableName) {
   var myTable = document.getElementById(tableName);
   var trElement = document.createElement('tr');
   trElement.appendChild(newCell('th', ''));
-  trElement.appendChild(newCell('th', 'Daily Total'));
+  trElement.appendChild(newCell('th', 'Total'));
   for (var i = 0; i < hours.length; i++) {
     trElement.appendChild(newCell('th', hours[i]));
   }
