@@ -10,20 +10,44 @@
   <title>Campfire Coffee</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="indexstyle.css" />
 </head>
 
 <body>
-  <h2>Campfire Coffee Daily Report</h2>
+  <header class="pageheader">
+    <div class="coffeeimg"> </div>
+
+    <div class="menusocialbars">
+      <div class="socialbar">
+        <ul class="sociallist">
+          <li><img src="assets/fb-icon.png"/></li>
+          <li><img src="assets/twit-icon.png"/></li>
+          <li><img src="assets/insta-icon.png"/></li>
+        </ul>
+      </div>
+      <div class="menubar">
+        <ul class="menulist">
+          <li><a href="index.html">HOME</a></li>
+          <li>ABOUT</li>
+          <li><a href="data.html">DATA</a></li>
+          <li>CONTACT</li>
+        </ul>
+      </div>
+      <div>
+        <div class="logo">
+          <h2 class="name">CampFire Coffee</h2>
+        </div>
+  </header>
   <div class="header">
-    <div class="coffeebeans">
+    <!-- <div class="coffeebeans">
       <img src="assets/coffee.jpg"/>
       <img src="assets/coffee.jpg"/>
       <img src="assets/coffee.jpg"/>
-    </div>
+    </div> -->
     <div class="inputblock">
       <h4>Add New Kiosk Information</h4>
       <form id="newkiosk">
-        <ul>
+        <ul class="formlists">
           <li>
             <input class="kioskloc" name="loc" type="text" placeholder="Location"/>
           </li>
@@ -45,6 +69,7 @@
       </form>
     </div>
   </div>
+
 
   <div class="panel panel-default">
     <h3>Beans Needed By Location Each Day (in pounds)</h3>

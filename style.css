@@ -4,14 +4,7 @@ body {
   margin-left:25px;
   margin-right:25px;
   margin-top:25px;
-}
-
-h2 {
-  background-color: #5A352D;
-  color:white;
-  text-align: center;
-  padding:20px 20px 20px 20px;
-  margin-bottom: 2px;
+  background-color: #efefef;
 }
 
 h3 {
@@ -31,14 +24,14 @@ table {
 .inputblock {
   height:200px;
   width:315px;
-  margin-bottom:10px;
 }
 
 .header {
   width:100%;
+  display: flex;
 }
 
-img {
+.coffeebeans img {
   margin-left:9px;
   height:202px;
   width:33%;
@@ -63,42 +56,41 @@ h4 {
 form {
   border-top:-10px;
   background-color: #DDDDDD;
-  border: 1px solid #5A352D;
+  border: 1px solid #EEEEEE;
 }
 
-label, button {
-  font-size: 12px;
-  padding: 4px;
-}
-
-ul {
+.formlists {
   list-style: none;
   margin:10px 0px 10px -15px;
 }
 
-li {
+.formlists li {
   padding-right:5px 0px 5px 0px;
   margin-bottom: 5px;
   font-size: 14px;
 }
 
-input {
+.formlists input {
   border:1px solid #999999;
   width:127px;
   padding:5px;
 }
 
-.kioskloc {
+.formlists .kioskloc {
   width:260px;
 }
 
-button {
+.formlists button {
   font-size: 12px;
   font-weight: bold;
   background-color: #5A352D;
   color: white;
   width:260px;
   border-top: 1px solid #green;
+}
+
+.formlists button:hover {
+  background-color:#498F1A;
 }
 
 th {

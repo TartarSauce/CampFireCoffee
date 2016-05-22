@@ -1,0 +1,162 @@
+body {
+  margin-left:25px;
+  margin-right:25px;
+  margin-top:25px;
+}
+
+.logo {
+  height:120px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #498F1A;
+}
+
+.coffeeimg {
+  height:80px;
+  background-image: url("assets/coffee.jpg");
+  opacity:1.0;
+}
+
+.socialbar {
+  float:right;
+}
+
+.menulist, .sociallist {
+  height:40px;
+  font-size: 14px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  background-color: #498f1a;
+}
+
+.sociallist img {
+  padding:10px 1px 1px 1px;
+  margin-right:20px;
+  width:70%;
+  border-radius:30px;
+}
+
+.sociallist li, .menulist li {
+    align-self: flex-end;
+    font-family: sans-serif;
+    font-family: Verdana;
+    display: inline;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.menulist li{
+  background-color:#5C3121;
+  padding: 14px 16px;
+  letter-spacing: 0.2em;
+}
+
+.menulist li:hover{
+  background-color:#498F1A;
+}
+
+.name {
+  margin-left:20px;
+  font-family:sans-serif;
+  font-family: Verdana;
+  font-size:40px;
+  color:white;
+  line-height: 1em;
+  text-transform: lowercase;
+  letter-spacing:0.2em;
+  word-spacing:0.6em;
+}
+
+.middlecontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  align-self: flex-start;
+  margin-top:25px;
+  width:20%;
+  font-family: sans-serif, 'Verdana';
+  font-size: 14px;
+  line-height: 2em;
+}
+
+.locations h3 {
+  margin:20px;
+}
+.locations ul {
+  list-style-type: none;
+  margin-bottom:40px;
+}
+
+.timings p{
+  margin-left:20px;
+  color: #498F1A;
+  font-style: italic;
+  margin-top:-15px;
+}
+
+.allsections {
+  margin-top:25px;
+  width:80%;
+  align-self:flex-end;
+}
+
+.allsections img {
+  width:50%;
+  height:350px;
+}
+
+.ourprocess {
+  display: flex;
+  box-shadow: 5px 8px 5px #cccccc;
+}
+
+.campingphotos {
+  margin-top:50px;
+  text-align: center;
+  background-color: #efefef;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 5px 8px 5px #cccccc;
+}
+.campingphotos img {
+  padding:10px;
+  width:20%;
+  height:150px;
+}
+
+.processdescription {
+  margin-top:10px;
+  margin-left:20px;
+  font-family: sans-serif, 'Verdana';
+  font-size: 14px;
+  line-height: 2em;
+}
+
+.homefooter {
+  text-align: center;
+}
+
+.greenline {
+  margin-top:50px;
+  height:3px;
+  background-color: #498F1A;
+}
+
+.copyright p{
+  font-family: sans-serif, 'Verdana';
+  font-size: 12px;
+  line-height: 2em;
+  color:#498F1A;
+}
