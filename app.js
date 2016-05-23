@@ -122,6 +122,7 @@ function newCell(elementType, elementText) {
 function drawTables() {
   drawTableHeader('beans-table');
   drawTableHeader('baristas-table');
+
   for (var i = 0; i < kioskLocations.length; i++) {
     kioskLocations[i].getStats();
     beansTable.appendChild(kioskLocations[i].render('beans-table'));
@@ -203,9 +204,24 @@ function newKioskSubmit(event) {
   event.target.cups.value = null;
   event.target.pounds.value = null;
 
+  // save all kiosk locations to LocalStorage
+  // so the list can be updated on Home page
+  var locNames = [];
+  localStorage.removeItem('location');
+  for (var i = 0; i < kioskLocations.length; i++) {
+    locNames[i] = kioskLocations[i].location;
+  }
+  localStorage.setItem('locations', locNames);
+
   // redraw tables with new info added
   drawTables();
 };
+
+// clear localstorage if this page is reloaded
+// that will also update the home page
+function checkLocalStorage() {
+  localStorage.clear();
+}
 
 //---------------------------------------------
 // EXECUTABLE CODE BEGINS
@@ -222,3 +238,6 @@ drawTables();
 
 // define event listener for the submit button
 newKioskForm.addEventListener('submit', newKioskSubmit);
+
+// window.addEventListener('load', clearLocalStorage);
+window.addEventListener('load', checkLocalStorage);
