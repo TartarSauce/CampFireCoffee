@@ -150,7 +150,7 @@ a, a:visited, a:hover, a:active {
 
 .greenline {
   margin-top:50px;
-  height:3px;
+  height:2px;
   background-color: #498F1A;
 }
 
@@ -158,5 +158,5 @@ a, a:visited, a:hover, a:active {
   font-family: sans-serif, 'Verdana';
   font-size: 12px;
   line-height: 2em;
-  color:#498F1A;
+  color:#ababab;
 }

@@ -29,19 +29,12 @@ table {
 .header {
   width:100%;
   display: flex;
+  justify-content: space-between;
 }
 
-.coffeebeans img {
-  margin-left:9px;
-  height:202px;
-  width:33%;
-  margin-right:-14px;
-}
-
-.coffeebeans {
-  height:202px;
-  width:75%;
-  float:right;
+.header img {
+  width:23%;
+  height:200px;
 }
 
 h4 {
